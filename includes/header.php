@@ -8,6 +8,7 @@ require_once("includes/classes/ErrorMessage.php");
 require_once("includes/classes/SeasonProvider.php");
 require_once("includes/classes/Season.php");
 require_once("includes/classes/Video.php");
+require_once("includes/classes/User.php");
 
 if(!isset($_SESSION["userLoggedIn"])) {
     header("Location: register.php");
@@ -23,7 +24,13 @@ $userLoggedIn = $_SESSION["userLoggedIn"];
 
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script src="https://kit.fontawesome.com/06a651c8da.js" crossorigin="anonymous"></script>
-        <script src="assets/js/script.js"></script>
+        <script src="./assets/js/script.js"></script>
     </head>
     <body>
         <div class='wrapper'>
+
+        <?php 
+    if(!isset($hideNav)) {
+        include_once("includes/navBar.php");
+    }
+?>

@@ -8,6 +8,44 @@ class PreviewProvider {
         $this->username = $username;
     }
 
+
+
+    public function  createTVShowPreviewVideo() {
+        $entitiesArray = EntityProvider::getTVShowEntities($this->con , null , 1);
+
+        if(sizeof($entitiesArray) == 0) {
+            ErrorMessage::show("No TV Shows to display");
+        }
+
+        return $this->createPreviewVideo($entitiesArray[0]);
+    }
+
+
+
+    public function  createMoviesPreviewVideo() {
+        $entitiesArray = EntityProvider::getMoviesEntities($this->con , null , 1);
+
+        if(sizeof($entitiesArray) == 0) {
+            ErrorMessage::show("No Movies to display");
+        }
+
+        return $this->createPreviewVideo($entitiesArray[0]);
+    }
+
+
+    public function  createCategoryPreviewVideo($categoryId) {
+        $entitiesArray = EntityProvider::getEntities($this->con , $categoryId , 1);
+
+        if(sizeof($entitiesArray) == 0) {
+            ErrorMessage::show("No Movies to display");
+        }
+
+        return $this->createPreviewVideo($entitiesArray[0]);
+    }
+
+
+
+
     public function createPreviewVideo($entity) {
         
         if($entity == null) {
@@ -15,14 +53,15 @@ class PreviewProvider {
         }
 
         $id = $entity->getId();
+        // ErrorMessage::show($id);
         $name = $entity->getName();
         $preview = $entity->getPreview();
         $thumbnail = $entity->getThumbnail();
+        
 
         // TODO: ADD SUBTITLE
 
         return "<div class='previewContainer'>
-
                     <img src='$thumbnail' class='previewImage' hidden>
 
                     <video autoplay muted class='previewVideo' onended='previewEnded()'>
@@ -35,7 +74,7 @@ class PreviewProvider {
                             <h3>$name</h3>
 
                             <div class='buttons'>
-                                <button><i class='fas fa-play'></i> Play</button>
+                                <button onclick='watchVideo($id)'><i class='fas fa-play'></i> Play</button>
                                 <button onclick='volumeToggle(this)'><i class='fas fa-volume-mute'></i></button>
                             </div>
 
