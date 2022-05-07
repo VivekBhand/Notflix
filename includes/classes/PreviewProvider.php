@@ -21,7 +21,6 @@ class PreviewProvider {
     }
 
 
-
     public function  createMoviesPreviewVideo() {
         $entitiesArray = EntityProvider::getMoviesEntities($this->con , null , 1);
 
@@ -31,7 +30,6 @@ class PreviewProvider {
 
         return $this->createPreviewVideo($entitiesArray[0]);
     }
-
 
     public function  createCategoryPreviewVideo($categoryId) {
         $entitiesArray = EntityProvider::getEntities($this->con , $categoryId , 1);
